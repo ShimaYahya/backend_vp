@@ -64,10 +64,24 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-const { sequelize } = require('./models');
+// const { sequelize } = require('./models');
 
-sequelize.sync({ alter: true })  // ⬅️ creates or updates tables without deleting existing ones
+// sequelize.sync({ alter: true })  // ⬅️ creates or updates tables without deleting existing ones
+//   .then(() => {
+//     console.log("✅ Database synced");
+//   })
+//   .catch(err => console.error("❌ Sync error:", err));
+
+
+
+
+const { sequelize } = require('./models'); // أو المسار المناسب
+
+sequelize.authenticate()
   .then(() => {
-    console.log("✅ Database synced");
+    console.log("✅ Connected to the database!");
   })
-  .catch(err => console.error("❌ Sync error:", err));
+  .catch((err) => {
+    console.error("❌ Database connection failed:", err);
+  });
+
